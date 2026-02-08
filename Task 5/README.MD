@@ -11,7 +11,7 @@ This setup helps to:
 - Scale resources automatically when load increases
 
 ## Architecture
-![Architecture](../images/architectures/task-5.png)
+![Architecture](../images/architectures/Task-5.png)
 
 ## AWS Region Used
 - Region: us-west-1 (N. California)
