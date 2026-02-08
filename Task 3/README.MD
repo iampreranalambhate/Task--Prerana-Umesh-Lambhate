@@ -4,7 +4,7 @@
 The objective of this task is to deploy and run Docker containers on an AWS EC2 instance using a cost-optimized Amazon Linux server (t2.micro / t3.micro). This task demonstrates successful EC2 setup, Docker installation, and container execution.
 
 ## Architecture
-![Architecture](../images/architectures/task-3.png)
+![Architecture](../images/architectures/Task-3.png)
 
 ## Technologies Used
 - **AWS EC2**
