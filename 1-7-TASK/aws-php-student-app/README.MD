@@ -1,4 +1,4 @@
-# AWS Server Management Assignment — Combined README (Tasks 1–6)
+# AWS Server Management Assignment — Combined README (Tasks 1–7)
 
 This repository contains **all 7 tasks** in one bounded `README.md` file, including **screenshots** (stored under the `images/` folder).
 
