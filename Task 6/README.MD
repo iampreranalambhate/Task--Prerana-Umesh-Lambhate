@@ -11,7 +11,7 @@ Scaling logic:
 - When CPU usage goes below 50%, extra instances are removed.
 
 ## Architecture
-![Architecture](../images/architectures/task-6.png)
+![Architecture](../images/architectures/Task-6.png)
 
 ## AWS Region Used
 - Region: us-west-1 (N. California)
