@@ -9,7 +9,7 @@ It demonstrates how a **frontend application communicates with a backend API**, 
 The application allows users to **add, view, and delete student records** using a clean UI and REST-style backend.
 
 ## Architecture
-![Architecture](../../images/architectures/task-1.jpg)
+![Architecture](../images/architectures/task-1.jpg)
 
 ## Tech Stack
 
