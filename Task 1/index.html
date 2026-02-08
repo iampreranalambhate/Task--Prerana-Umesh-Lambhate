@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task 1 - Simple Full Stack App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-4">
+    <h2 class="mb-3">Student Manager</h2>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Add Student</h5>
+
+        <div class="row g-2">
+          <div class="col-md-5">
+            <input id="name" class="form-control" placeholder="Enter name">
+          </div>
+          <div class="col-md-5">
+            <input id="email" class="form-control" placeholder="Enter email">
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary w-100" onclick="addStudent()">Add</button>
+          </div>
+        </div>
+
+        <div id="msg" class="mt-3"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Students List</h5>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped align-middle">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Created</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const API_URL = "api.php";
+let msgTimer = null;
+
+function showMsg(text, type = "success") {
+  const msgDiv = document.getElementById("msg");
+
+  if (msgTimer) {
+    clearTimeout(msgTimer);
+  }
+
+  msgDiv.innerHTML = `
+    <div class="alert alert-${type}">
+      ${text}
+    </div>
+  `;
+
+  msgTimer = setTimeout(() => {
+    msgDiv.innerHTML = "";
+  }, 10000);
+}
+
+async function loadStudents() {
+  const res = await fetch(`${API_URL}?action=list`);
+  const json = await res.json();
+
+  const tbody = document.getElementById("tbody");
+  tbody.innerHTML = "";
+
+  if (!json.success) {
+    tbody.innerHTML = `<tr><td colspan="5">Failed to load data</td></tr>`;
+    return;
+  }
+
+  if (json.data.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" class="text-center">No students found</td></tr>`;
+    return;
+  }
+
+  json.data.forEach(row => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${row.id}</td>
+        <td>${row.name}</td>
+        <td>${row.email}</td>
+        <td>${row.created_at}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" onclick="deleteStudent(${row.id})">
+            Delete
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+
+async function addStudent() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+
+  if (!name || !email) {
+    showMsg("Please enter name and email", "warning");
+    return;
+  }
+
+  const res = await fetch(`${API_URL}?action=add`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email })
+  });
+
+  const json = await res.json();
+
+  if (json.success) {
+    showMsg("Student added successfully", "success");
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    loadStudents();
+  } else {
+    showMsg("Failed to add student", "danger");
+  }
+}
+
+
+async function deleteStudent(id) {
+  const res = await fetch(`${API_URL}?action=delete`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id })
+  });
+
+  const json = await res.json();
+
+  if (json.success) {
+    showMsg("Student deleted successfully", "success");
+    loadStudents();
+  } else {
+    showMsg("Failed to delete student", "danger");
+  }
+}
+
+loadStudents();
+</script>
+
+</body>
+</html>

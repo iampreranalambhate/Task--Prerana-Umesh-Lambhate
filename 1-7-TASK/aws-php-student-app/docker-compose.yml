@@ -1,0 +1,31 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: student-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: task1_db
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/DB.sql:/docker-entrypoint-initdb.d/DB.sql:ro
+    ports:
+      - "3306:3306"
+    restart: always
+
+  web:
+    build: .
+    container_name: student-web
+    environment:
+      DB_HOST: db
+      DB_NAME: task1_db
+      DB_USER: root
+      DB_PASS: rootpassword
+      DB_PORT: 3306
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    restart: always
+
+volumes:
+  db_data:
