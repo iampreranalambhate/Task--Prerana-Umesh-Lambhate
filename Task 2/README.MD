@@ -10,7 +10,7 @@ The objective of this task is to:
 This task is implemented on an **AWS EC2 instance (Amazon Linux)** using **Docker and Docker Compose**.
 
 ## Architecture
-![Architecture](../images/architectures/task-2.png)
+![Architecture](../images/architectures/Task-2.png)
 
 
 ## Technologies Used
