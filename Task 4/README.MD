@@ -6,7 +6,7 @@ Make the application accessible from a browser using:
 - **Elastic IP** (static / recommended)
 - **Route 53 Domain** (optional: domain → Elastic IP)
 ## Architecture
-![Architecture](../images/architectures/task-4.png)
+![Architecture](../images/architectures/Task-4.png)
 
 
 ## Prerequisites
