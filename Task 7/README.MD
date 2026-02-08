@@ -3,7 +3,7 @@
 This guide explains common problems when deploying containerized applications and how to fix them in simple steps.
 
 ## Architecture
-![Architecture](../images/architectures/task-7.png)
+![Architecture](../images/architectures/Task-7.png)
 
 ## 1. App Not Accessible
 **Problem:**  
